@@ -1,0 +1,101 @@
+.header {
+  letter-spacing: 1.5px;
+  min-height: var(--header-height);
+  &--bar {
+    position: relative;
+    z-index: 2;
+    font-family: var(--font-family);
+    align-items: center;
+    justify-content: space-between;
+    background: var(--secondary-color);
+    padding: var(--padding-small);
+    color: var(--primary-color);
+    animation-delay: .7s;
+    span {
+      font-size: 14px;
+    }
+    a {
+      color: var(--primary-color);
+    }
+  }
+  &--logo {
+    position: relative;
+    z-index: 1;
+    animation-delay: .9s;
+    animation-name: zoom-out;
+
+  }
+  &--navigation {
+    position: relative;
+    z-index: 3;
+    .navbar {
+      animation-delay: .8s;
+
+    }
+
+  }
+}
+
+@media only screen and (max-height: 678px) {
+  .header {
+    &--logo {
+      img {
+        width: 124px;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 991px) {
+  .header {
+    height: auto;
+    &--logo {
+      img {
+        width: 128px;
+      }
+    }
+    .navbar {
+      .navbar-collapse {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+        background: #fff;
+        background: var(--primary-color);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: var(--medium);
+        opacity: 0;
+        transition: all var(--transition-speed) ease-in-out var(--transition-speed);
+        visibility: hidden;
+        .navbar-nav {
+          &> .nav-item {
+            animation-name: appearance-rev;
+            animation-duration: .3s;
+            animation-direction: normal;
+            animation-fill-mode: forwards;
+          }
+        }
+        &.show {
+          opacity: 1;
+          transition: all var(--transition-speed) ease-in-out;
+          visibility: visible;
+          .navbar-nav {
+            &> .nav-item {
+              opacity: 0;
+              animation-name: appearance--top;
+              animation-duration: var(--transition-speed);
+              animation-delay: var(--transition-speed);
+              animation-direction: normal;
+              animation-fill-mode: forwards;
+            }
+          }
+
+        }
+      }
+    }
+  }
+}

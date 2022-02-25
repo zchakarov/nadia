@@ -1,0 +1,134 @@
+@import "variables";
+@import "mixins";
+.post{
+
+  &--header {
+    @include flexbox;
+    @include flex-direction(row);
+    @include justify-content(space-between);
+    @include align-items(center);
+    min-height: calc( 100vh - var(--header-height) - 2rem);
+    padding: 0;
+    &--breadcrumbs {
+      display: flex;
+      align-items: center;
+      animation-delay: .4s;
+    }
+    &--thumbnail {
+      animation-delay: .5s;
+
+      img {
+        max-width: 100%;
+        z-index: -1;
+
+      }
+    }
+    &--text {
+      @include flexbox;
+      @include flex-direction(column);
+      @include justify-content(center);
+      @include align-items(center);
+      color: var(--text-color);
+
+      h1, .preis {
+        text-align: center;
+        animation-delay: .6s;
+
+      }
+    }
+  }
+  &--body {
+    @include flexbox;
+    @include flex-direction(column);
+    @include align-items(center);
+    width: 100%;
+    padding: var(--big) 0;
+    animation-delay: var(--transition-speed);
+
+    p {
+      @include push--auto;
+      padding: var(--medium) 0;
+    }
+    .wp-block-gallery {
+      .blocks-gallery-item {
+        z-index: 2;
+
+      }
+    }
+    .board {
+      .row {
+        @include flexbox;
+        @include flex-direction(row);
+        @include flex-wrap(wrap);
+        @include push--auto;
+        width: 100%;
+        overflow-y: hidden;
+        overflow-x: auto;
+        --primary-color-space: nowrap;
+        .board-image {
+          padding: 0;
+          img {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+@media only screen and (max-width: 989px) {
+  .post{
+    .modal-content-header {
+      height: auto;
+      @include align-items(center);
+    }
+  }
+}
+@media only screen and (max-width: 767px) {
+  .post {
+    &--header {
+      @include flex-direction(column);
+      @include justify-content(center);
+      @include align-items(center);
+      height: auto;
+      position: relative;
+      margin-top: 15px;
+    }
+    &--body {
+      p {
+        padding: var(--medium) 0;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 480px) {
+  .post {
+    .modal-content-header {
+
+      .modal-content-thumbnail {
+        @include flexbox;
+        @include flex-direction(column);
+        @include justify-content(center);
+      }
+      .modal-content-text {
+        @include align-items(center);
+        text-align: center;
+      }
+    }
+    .modal-content-body {
+      figure {
+        img {
+          width: auto;
+        }
+      }
+      p {
+        @include push--auto;
+        width: 100%;
+      }
+    }
+  }
+}
+
+

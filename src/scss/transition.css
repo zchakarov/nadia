@@ -1,0 +1,48 @@
+.fade-enter, .fade-appear {
+  transform: translateX(0);
+  transform-origin: center;
+  transition: all var(--transition-speed) ease-in-out var(--transition-speed);
+  opacity: 0;
+}
+.fade-enter .image-box, .fade-appear .image-box, .fade-enter .cat-container, .fade-appear .cat-container, .fade-enter .content-container, .fade-appear .content-container {
+  opacity: 0;
+  transition: var(--transition-speed) ease-in-out 0s;
+}
+
+.fade-enter-active, .fade-enter-done,
+.fade-appear-done {
+  opacity: 0;
+  transform: scale(1) translateX(0);
+  transform-origin: center;
+  transition: all var(--transition-speed) ease-in-out;
+}
+
+.fade-enter-done,
+.fade-appear-done {
+  opacity: 1;
+  transition: all var(--transition-speed) ease-in-out;
+}
+.fade-enter-done .image-box, .fade-enter-done .cat-container, .fade-enter-done .content-container,
+.fade-appear-done .image-box,
+.fade-appear-done .cat-container,
+.fade-appear-done .content-container {
+  opacity: 1;
+  transition: var(--transition-speed) ease-in-out 0s;
+}
+
+.fade-exit.fade-exit-active,
+.fade-exit.fade-leave-active {
+  opacity: 0;
+  transform: translateX(0);
+  transform-origin: center;
+  transition: all var(--transition-speed) ease-in-out;
+}
+.fade-exit.fade-exit-active .image-box, .fade-exit.fade-exit-active .cat-container, .fade-exit.fade-exit-active .content-container,
+.fade-exit.fade-leave-active .image-box,
+.fade-exit.fade-leave-active .cat-container,
+.fade-exit.fade-leave-active .content-container {
+  opacity: 0;
+  transition: var(--transition-speed) ease-in-out 0s;
+}
+
+/*# sourceMappingURL=transition.css.map */

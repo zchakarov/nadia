@@ -1,0 +1,72 @@
+// Breakpoints
+
+$breakpoint--xs : 576px;
+$breakpoint--small : 767px;
+$breakpoint--medium: 991px;
+$breakpoint--large: 1199px;
+$breakpoint--xl: 1400px;
+
+:root {
+
+  --l: 50%;
+
+  --header-height: 260px;
+  --header-height-small: 190px;
+  --header-height-xs: 185px;
+
+  --primary-color: #fff;
+  --secondary-color: #C77A9A;
+  --tertiary-color: #89cff0;
+  --tertiary-color-darker: hsl(from var(--tertiary-color) h s calc(var(--l) - 5%));
+
+  --text-color: #5b5654;
+
+  accent-color: #C77A9A;
+
+
+  --padding-big: 1rem;
+  --padding-medium: .75rem;
+  --padding-small: .5rem;
+
+  --transition-speed: .45s;
+
+  --font-family: 'Bebas Neue', cursive;
+
+
+
+
+}
+
+@media only screen and (max-height: 678px) {
+  :root {
+    --l: 50%;
+
+    --header-height:  180px;
+
+    --padding-big: .75rem;
+    --padding-medium: .5rem;
+    --padding-small: .25rem;
+
+
+  }
+}
+
+
+@media only screen and (max-width: 767px) {
+
+
+  :root {
+
+    --l: 50%;
+
+    --header-height:  140px;
+
+    --padding-big: .75rem;
+    --padding-medium: .5rem;
+    --padding-small: .25rem;
+
+
+  }
+}
+
+

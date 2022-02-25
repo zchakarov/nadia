@@ -1,0 +1,39 @@
+h1 {
+  font-size: 3rem;
+}
+
+h4 {
+  font-size: 1rem;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-family);
+  line-height: 1  ;
+}
+
+a, .link {
+  color: var(--tertiary-color);
+  transition: var(--transition-speed);
+  cursor: pointer;
+  &:hover {
+    color: var(--tertiary-color-darker);
+  }
+}
+
+p {
+  margin: 0;
+  line-height: 1.75;
+}
+
+@media only screen and (max-width: 575px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+  h2 {
+
+  }
+  h3 {
+    font-size: 1rem;
+  }
+}
+
