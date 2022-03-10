@@ -8,8 +8,11 @@ import "react-image-lightbox/style.css";
 import {scrolltop} from "./scrollTop";
 import {capitalize} from "./capitalize";
 import {animationOnScroll} from "./animationOnScroll";
+import {replaceUmlaute} from "./replaceUmlaute";
+import  Footer from "./footer"
 export default function Post() {
     const [post, setPost] = useState([]);
+    const [fetching, setFetching] = useState(true);
     const [images, setImages] = useState([]);
     const [ photoIndex, setPhotoIndex] = useState(0);
     const [ open, setOpen ] = useState(false);
@@ -33,11 +36,15 @@ export default function Post() {
     };
 
     const getResult = async () => {
-        const post = await axios.get('http://test.chakito.com/m/index.php/wp-json/wp/v2/posts?&slug='+ name);
-        setPost(post.data);
-        if(post.data[0]){
-            document.title=capitalize(name);
-        }
+        const post = await axios.get('http://test.chakito.com/m/index.php/wp-json/wp/v2/posts?search='+ name);
+        setPost(post.data.filter(
+            function(element){
+                console.log(element.x_categories)
+                console.log(category)
+                return replaceUmlaute(element.x_categories).toLowerCase() == category.toLowerCase() && replaceUmlaute(element.title.rendered).toLowerCase() == name.toLowerCase();
+
+            }));
+        setFetching(false);
         /*document.addEventListener('contextmenu',
                 event => event.preventDefault());*/
 
@@ -72,6 +79,16 @@ export default function Post() {
         scrolltop();
 
     }, [setPost]);
+    if(post.length > 0 && fetching === true){
+        document.title=`Nadia // ${capitalize(post[0].title.rendered)}`;
+    }
+    useEffect(()=> {
+
+        if(post.length === 0 && fetching === false) {
+            navigate("/404",{state:{length:post.length,fetching:fetching}});
+        }
+    }, [fetching])
+
     return (
         <div>
             {post.map((i, index) => {
@@ -87,9 +104,13 @@ export default function Post() {
                                         <Col lg="auto" sm={4} xs={8} className="post--header--text mt-2 mx-4">
                                             <div className="animation animation--top post--header--breadcrumbs">
                                                 <Link to="/"><h3 className="m-0">Start</h3></Link> /
-                                                {category && <h3 onClick={()=> navigate(`/${i.x_tags}/${category}`)} className="link m-0 align-self-center">{category}</h3>}
+                                                {category && <h3 onClick={()=> navigate(`/${i.x_tags}/${category}`)} className="link m-0 align-self-center">{i.x_categories}</h3>}
                                             </div>
                                             <h1 className="animation animation--bottom m-0">{i.title.rendered}</h1>
+                                        </Col>
+                                        <Col xl={12}>
+                                            <Footer />
+
                                         </Col>
                                     </Row>
                                 </Container>
@@ -106,13 +127,15 @@ export default function Post() {
                                                             <Lightbox
                                                                 enableZoom ={false}
                                                                 reactModalProps={customStyles}
-
                                                                 mainSrc={images[photoIndex]}
                                                                 nextSrc={images[(photoIndex + 1) % images.length]}
                                                                 prevSrc={images[(photoIndex + images.length - 1) % images.length]}
                                                                 onCloseRequest={() => closeGallery()}
-                                                                onMovePrevRequest={() =>
+                                                                onMovePrevRequest={() => {
                                                                     setPhotoIndex((photoIndex + images.length - 1) % images.length)
+                                                                    console.log(images[(photoIndex + images.length - 1) % images.length])
+                                                                }
+
                                                                 }
                                                                 onMoveNextRequest={() =>
                                                                     setPhotoIndex((photoIndex + 1) % images.length)

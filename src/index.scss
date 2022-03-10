@@ -38,10 +38,12 @@ body {
 
 
 .posts--grid {
+  min-height: calc(100vh - var(--header-height) - 2rem);
+  align-items: center;
   &--element {
     height: 100%;
     padding: 1rem 4rem;
-    min-height: calc((100vh - var(--header-height) - 10rem) / 2);
+    min-height: calc((100vh - var(--header-height))/ 2);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -184,7 +186,12 @@ a {
 
 }
 
-
+.footer {
+  animation-delay: .8s;
+  .nav {
+    justify-content: center;
+  }
+}
 
 .transition-element > * {
   position: absolute;

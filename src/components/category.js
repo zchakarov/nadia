@@ -6,26 +6,27 @@ import {Loading} from "./loading";
 import {scrolltop} from "./scrollTop";
 import {animationOnScroll} from "./animationOnScroll";
 import Tags from "./tags";
+import Footer from "./footer";
 import Products from "./Products";
 import {capitalize} from "./capitalize";
+import {replaceUmlaute} from "./replaceUmlaute";
 
 
 export default function Category() {
     const [portfolio, setPortfolio] = useState([]);
     const [fetching, setFetching] = useState(true);
     const { kategorie, category } = useParams();
-    const navigate = useNavigate();
-    const [parent, setParent] = useState([]);
     const [tag, setTag] = useState([]);
-
+    const navigate = useNavigate();
     useEffect(  () => {
         animationOnScroll();
         getCurentTag();
     }, []);
+
     useEffect( () => {
         getResults();
 
-    }, [fetching]);
+    }, [tag]);
 
     useEffect(  () => {
         animationOnScroll()
@@ -34,31 +35,31 @@ export default function Category() {
     const getCurentTag = async () => {
         const currentTag = await axios.get('http://test.chakito.com/m/index.php/wp-json/wp/v2/tags?search='+ kategorie);
         setTag(currentTag.data);
-        setFetching(false);
-        console.log(currentTag.data)
     }
     const getResults = async () => {
-        console.log(tag);
         const portfolio = await axios('http://test.chakito.com/m/index.php/wp-json/wp/v2/posts?per_page=60&tags='+tag[0].id);
         setPortfolio(portfolio.data.filter(
             function(element){
-                return element.x_categories.toLowerCase() == category.toLowerCase() && kategorie === element.x_tags;
-
+                return replaceUmlaute(element.x_categories).toLowerCase() == category.toLowerCase() && kategorie === element.x_tags;
             }
         ));
+        setFetching(false);
 
     }
-
+    if(portfolio.length > 0 && fetching === true    ) {
+        document.title=`Nadia // ${capitalize(portfolio[0].x_categories)}`;
+    }
     useEffect(  () => {
         scrolltop();
     }, []);
 
-    useEffect( ()=> {
-        document.title = capitalize(category);
-        /*if(portfolio.length === 0 && fetching === false) {
-            navigate("/404");
-        }*/
-    }, [])
+    useLayoutEffect( ()=> {
+
+        if(portfolio.length === 0 && fetching === false) {
+            navigate("/404",{state:{length:portfolio.length,fetching:fetching}});
+        }
+
+    }, [fetching])
 
     return (
 
@@ -74,7 +75,7 @@ export default function Category() {
                     </Container>
 
                 </div>
-
+                <Footer />
             </div>
 
         </div>

@@ -15,9 +15,14 @@ export default function Home() {
         });
         animationOnScroll();
     }, []);
-    useLayoutEffect( ()=> {
-        document.title = "Startseite";
-    }, []);
+    useEffect( ()=> {
+        if(data.length > 0) {
+            document.title = "Startseite";
+
+        }
+
+    }, [data]);
+
     return (
         <div className="content--container">
             <Container fluid="xl">
@@ -39,14 +44,14 @@ export default function Home() {
                                 : <div className="background image--container" />
                                 }
 
-                                <h3 className="headline">
+                                <h4 className="headline">
                                     {cat.title.rendered}
                                     <span>
-                                        <h4 className="m-0">
+                                        <h5 className="m-0">
                                             {cat.acf.categoryname === "madchen" ? "Mädchen" : cat.acf.categoryname}
-                                        </h4>
+                                        </h5>
                                     </span>
-                                </h3>
+                                </h4>
                             </Link>
                         </Col>
                     ))

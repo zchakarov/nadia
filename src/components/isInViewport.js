@@ -5,5 +5,5 @@ jQuery.fn.isInViewport = function () {
     let elementBottom = elementTop + jQuery(this).outerHeight();
     let viewportTop = jQuery(window).scrollTop();
     let viewportBottom = viewportTop + jQuery(window).height();
-    return elementBottom > viewportTop && elementTop < viewportBottom - 150;
+    return elementBottom > viewportTop && elementTop < viewportBottom - 100;
 };

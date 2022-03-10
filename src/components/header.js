@@ -17,6 +17,7 @@ import SearchBar from "./searchBar";
 import Home from "./home";
 import "./isInViewport";
 import {Loading} from "./loading";
+import {replaceUmlaute} from "./replaceUmlaute";
 library.add(fas, faHome, faPhone);
 library.add(fab, faInstagram);
 
@@ -124,7 +125,7 @@ export default function Header(products){
                                                                               data-name={child.title}
                                                                              onClick={() => setExpanded(false)}
                                                                              to={{
-                                                                                 pathname: `/${item.slug}/${child.title}`
+                                                                                 pathname: `/${item.slug.toLowerCase()}/${replaceUmlaute(child.title.toLowerCase())}`
                                                                              }}
                                                                     >{child.title}
                                                                     </NavLink>:

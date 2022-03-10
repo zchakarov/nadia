@@ -15,11 +15,13 @@ export default function Article() {
         const page = await axios.get('http://test.chakito.com/m/index.php/wp-json/wp/v2/pages?&slug='+ name);
         setPost(page.data);
         setFetching(false);
-        if(page) {
-            document.title = capitalize(name);
-        }
+
 
     };
+    if(post.length > 0 && fetching == true) {
+        document.title=`Nadia // ${capitalize(post[0].title.rendered)}`;
+
+    }
     useEffect(  () => {
         getResult();
         animationOnScroll();
@@ -27,7 +29,7 @@ export default function Article() {
 
     useEffect(()=> {
         if(post.length === 0 && fetching === false) {
-            navigate("/404");
+            navigate("/404",{state:{length:post.length,fetching:fetching}});
         }
     }, [post])
 

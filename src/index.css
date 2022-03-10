@@ -41,7 +41,7 @@ h1 {
 }
 
 h4 {
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 
 h1, h2, h3, h4 {
@@ -140,7 +140,7 @@ p {
   font-family: var(--font-family);
   align-items: center;
   justify-content: space-between;
-  background: var(--secondary-color);
+  background: var(--tertiary-color);
   padding: var(--padding-small);
   color: var(--primary-color);
   animation-delay: 0.7s;
@@ -307,7 +307,7 @@ p {
   transition: all var(--transition-speed) ease-in-out 0s;
 }
 .nav-item .nav-link {
-  color: var(--secondary-color) !important;
+  color: var(--tertiary-color) !important;
   padding: 0.5rem !important;
   text-align: center;
   display: inline-block;
@@ -614,7 +614,7 @@ input:focus {
   -ms-flex-align: center;
   -webkit-align-items: center;
   align-items: center;
-  min-height: calc( 100vh - var(--header-height) - 2rem);
+  min-height: calc( 100vh - var(--header-height) - 4rem);
   padding: 0;
 }
 .post--header--breadcrumbs {
@@ -915,10 +915,14 @@ body {
   background: var(--primary-color);
 }
 
+.posts--grid {
+  min-height: calc(100vh - var(--header-height) - 2rem);
+  align-items: center;
+}
 .posts--grid--element {
   height: 100%;
   padding: 1rem 4rem;
-  min-height: calc((100vh - var(--header-height) - 10rem) / 2);
+  min-height: calc((100vh - var(--header-height))/ 2);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1031,6 +1035,13 @@ a:hover {
   text-align: center;
 }
 
+.footer {
+  animation-delay: 0.8s;
+}
+.footer .nav {
+  justify-content: center;
+}
+
 .transition-element > * {
   position: absolute;
   left: 50%;
@@ -1041,7 +1052,7 @@ a:hover {
 }
 
 .category:nth-of-type(1):hover .background {
-  transform: scale(1.25) rotate(6deg);
+  transform: scale(1.25) rotate(5deg);
 }
 
 .category:nth-of-type(2):hover .background {
@@ -1049,47 +1060,47 @@ a:hover {
 }
 
 .category:nth-of-type(3):hover .background {
-  transform: scale(1.25) rotate(5deg);
-}
-
-.category:nth-of-type(4):hover .background {
-  transform: scale(1.25) rotate(4deg);
-}
-
-.category:nth-of-type(5):hover .background {
   transform: scale(1.25) rotate(7deg);
 }
 
-.category:nth-of-type(6):hover .background {
-  transform: scale(1.25) rotate(4deg);
+.category:nth-of-type(4):hover .background {
+  transform: scale(1.25) rotate(6deg);
 }
 
-.category:nth-of-type(7):hover .background {
+.category:nth-of-type(5):hover .background {
   transform: scale(1.25) rotate(3deg);
 }
 
-.category:nth-of-type(8):hover .background {
+.category:nth-of-type(6):hover .background {
   transform: scale(1.25) rotate(5deg);
 }
 
-.category:nth-of-type(9):hover .background {
+.category:nth-of-type(7):hover .background {
   transform: scale(1.25) rotate(4deg);
+}
+
+.category:nth-of-type(8):hover .background {
+  transform: scale(1.25) rotate(4deg);
+}
+
+.category:nth-of-type(9):hover .background {
+  transform: scale(1.25) rotate(3deg);
 }
 
 .category:nth-of-type(10):hover .background {
-  transform: scale(1.25) rotate(3deg);
+  transform: scale(1.25) rotate(7deg);
 }
 
 .category:nth-of-type(11):hover .background {
-  transform: scale(1.25) rotate(3deg);
+  transform: scale(1.25) rotate(6deg);
 }
 
 .category:nth-of-type(12):hover .background {
-  transform: scale(1.25) rotate(4deg);
+  transform: scale(1.25) rotate(7deg);
 }
 
 .category:nth-of-type(13):hover .background {
-  transform: scale(1.25) rotate(4deg);
+  transform: scale(1.25) rotate(6deg);
 }
 
 .category:nth-of-type(14):hover .background {
@@ -1097,27 +1108,27 @@ a:hover {
 }
 
 .category:nth-of-type(15):hover .background {
-  transform: scale(1.25) rotate(6deg);
+  transform: scale(1.25) rotate(5deg);
 }
 
 .category:nth-of-type(16):hover .background {
-  transform: scale(1.25) rotate(6deg);
-}
-
-.category:nth-of-type(17):hover .background {
-  transform: scale(1.25) rotate(3deg);
-}
-
-.category:nth-of-type(18):hover .background {
   transform: scale(1.25) rotate(7deg);
 }
 
+.category:nth-of-type(17):hover .background {
+  transform: scale(1.25) rotate(4deg);
+}
+
+.category:nth-of-type(18):hover .background {
+  transform: scale(1.25) rotate(5deg);
+}
+
 .category:nth-of-type(19):hover .background {
-  transform: scale(1.25) rotate(3deg);
+  transform: scale(1.25) rotate(6deg);
 }
 
 .category:nth-of-type(20):hover .background {
-  transform: scale(1.25) rotate(3deg);
+  transform: scale(1.25) rotate(4deg);
 }
 
 .category .background:hover .headline {

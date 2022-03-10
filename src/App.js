@@ -24,7 +24,6 @@ function App() {
 
     useEffect( () => {
         getResults();
-        console.log(allProducts)
     },[fetching]);
 
     return (
@@ -36,16 +35,15 @@ function App() {
                     <CSSTransition
                         key={location.key}
                         classNames="transition-element fade"
-                        transitionAppear={true}
+                        transitionAppear={false}
                         transitionEnter={true}
                         transitionLeave={true}
                         timeout={{
-                            appear: 450,
-                            enter: 450,
-                            exit: 450,
+                            appear: 750,
+                            enter: 750,
+                            exit: 750,
                         }}
-                        unmountOnExit={true}
-
+                        unmountOnExit={false}
                     >
                         <Routes location={location} className='container'>
                             <Route path="/" element={<Home/>}/>
