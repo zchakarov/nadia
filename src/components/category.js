@@ -10,6 +10,7 @@ import Footer from "./footer";
 import Products from "./Products";
 import {capitalize} from "./capitalize";
 import {replaceUmlaute} from "./replaceUmlaute";
+import Error from "./error";
 
 
 export default function Category() {
@@ -37,13 +38,17 @@ export default function Category() {
         setTag(currentTag.data);
     }
     const getResults = async () => {
-        const portfolio = await axios('http://test.chakito.com/m/index.php/wp-json/wp/v2/posts?per_page=60&tags='+tag[0].id);
-        setPortfolio(portfolio.data.filter(
-            function(element){
-                return replaceUmlaute(element.x_categories).toLowerCase() == category.toLowerCase() && kategorie === element.x_tags;
-            }
-        ));
-        setFetching(false);
+        if(tag[0].id.length !== 0) {
+            const portfolio = await axios('http://test.chakito.com/m/index.php/wp-json/wp/v2/posts?per_page=60&tags='+tag[0].id);
+            setPortfolio(portfolio.data.filter(
+                function(element){
+                    return replaceUmlaute(element.x_categories).toLowerCase() == category.toLowerCase() && kategorie === element.x_tags;
+                }
+            ));
+            setFetching(false);
+        }
+
+
 
     }
     if(portfolio.length > 0 && fetching === true    ) {
@@ -56,28 +61,36 @@ export default function Category() {
     useLayoutEffect( ()=> {
 
         if(portfolio.length === 0 && fetching === false) {
-            navigate("/404",{state:{length:portfolio.length,fetching:fetching}});
+            document.title = "Nadia // 404";
         }
 
     }, [fetching])
 
     return (
 
-        <div>
-            <div>
-                <div className='content-container'>
-                    <Container fluid="xl">
+                <div>
+                    {(portfolio.length === 0 && fetching === false ) ?
+                        <Error/> :
+                    <div>
+                        <div className='content-container'>
+                            <Container fluid="xl">
+                                {fetching
+                                    ? <Loading text='Loading'/>
+                                    : <Tags posts={portfolio} category={category} parent={kategorie} fetching={fetching}/>
+
+                                }
+                            </Container>
+
+                        </div>
                         {fetching
                             ? <Loading text='Loading'/>
-                            : <Tags posts={portfolio} category={category} parent={kategorie} fetching={fetching}/>
-
+                            :
+                            <Footer/>
                         }
-                    </Container>
-
+                    </div>
+                    }
                 </div>
-                <Footer />
-            </div>
 
-        </div>
+
     )
 };

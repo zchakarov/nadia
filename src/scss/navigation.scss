@@ -61,11 +61,14 @@
     text-transform: uppercase;
     font-weight: 300;
     transition: all var(--transition-speed) ease-in-out 0s;
-
+    &.active {
+      pointer-events: none;
+      color: gray !important;
+    }
   }
   .nav-link {
-    color: var(--tertiary-color) !important;
-    padding: .5rem !important;
+    color: var(--secondary-color) !important;
+    padding: 0 .5rem !important;
     text-align: center;
     display: inline-block;
     background-color: var(--primary-color);

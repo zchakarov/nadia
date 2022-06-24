@@ -10,6 +10,8 @@ import {capitalize} from "./capitalize";
 import {animationOnScroll} from "./animationOnScroll";
 import {replaceUmlaute} from "./replaceUmlaute";
 import  Footer from "./footer"
+import {Loading} from "./loading";
+import Error from "./error";
 export default function Post() {
     const [post, setPost] = useState([]);
     const [fetching, setFetching] = useState(true);
@@ -39,29 +41,21 @@ export default function Post() {
         const post = await axios.get('http://test.chakito.com/m/index.php/wp-json/wp/v2/posts?search='+ name);
         setPost(post.data.filter(
             function(element){
-                console.log(element.x_categories)
-                console.log(category)
                 return replaceUmlaute(element.x_categories).toLowerCase() == category.toLowerCase() && replaceUmlaute(element.title.rendered).toLowerCase() == name.toLowerCase();
-
             }));
         setFetching(false);
-        /*document.addEventListener('contextmenu',
-                event => event.preventDefault());*/
-
     };
     useEffect(  () => {
         if(jQuery('.blocks-gallery-grid').length > 0) {
             jQuery('.blocks-gallery-grid li img').each(function () {
                 setImages(images => [...images, jQuery(this).attr('data-full-url')]);
             });
-
             jQuery('.blocks-gallery-grid').remove();
         }
         if(jQuery('.wp-block-gallery').length > 0) {
             jQuery('.wp-block-gallery .wp-block-image img').each(function () {
                 setImages(images => [...images, jQuery(this).attr('src')]);
             });
-
             jQuery('.wp-block-gallery').remove();
         }
         jQuery(document).ready(function() {
@@ -85,19 +79,19 @@ export default function Post() {
     useEffect(()=> {
 
         if(post.length === 0 && fetching === false) {
-            navigate("/404",{state:{length:post.length,fetching:fetching}});
+            document.title = "Nadia // 404";
         }
-    }, [fetching])
+    }, [])
 
     return (
         <div>
-            {post.map((i, index) => {
+            {(post.length > 0 && fetching === false) ? post.map((i, index) => {
                 return (
                     <div key={index} className=' content-container'>
-                        <div className='post' key={index}>
+                        <div className='post footerBottom' key={index}>
                             {i.x_featured_media?
-                                <Container fluid="xl">
-                                    <Row className="post--header justify-content-md-around my-3">
+                                <><Container fluid="xl">
+                                    <Row className="post--header justify-content-md-around">
                                         <Col lg={3} md={3} sm={4} xs={8} className={`animation animation--zoom--out post--header--thumbnail mx-4 ${images.length > 0 ? "pointer" : ""}`}>
                                             <Image onClick={openGallery} src={i.x_featured_media} fluid/>
                                         </Col>
@@ -109,11 +103,16 @@ export default function Post() {
                                             <h1 className="animation animation--bottom m-0">{i.title.rendered}</h1>
                                         </Col>
                                         <Col xl={12}>
-                                            <Footer />
 
                                         </Col>
                                     </Row>
                                 </Container>
+                                    {fetching
+                                        ? <Loading text='Loading'/>
+                                        :
+                                        <Footer/>
+                                    }
+                                </>
                                 : '' }
                             {i.content.rendered?
                                 <div className="animation post--body">
@@ -153,7 +152,9 @@ export default function Post() {
                         </div>
                     </div>
                 )
-            })}
+            }) :
+            <Error/>
+            }
         </div>
     )
 };

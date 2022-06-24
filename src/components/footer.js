@@ -12,9 +12,10 @@ export default function Footer() {
         axios.get('http://chakito.com/blog/index.php/wp-json/menus/v1/menus/footer').then(res => {
             setData(res.data);
         });
+        animationOnScroll(-25);
     }, []);
     return (
-        <div className="animation animation--bottom footer">
+        <div className="animation animation--left footer">
             <Container fluid="xl">
                 <Row className='justify-content-center'>
                     <Col lg={10} sm={10}>
@@ -22,7 +23,7 @@ export default function Footer() {
                             {data.items?
                                 data.items.map((link, index) => (
                                     <Nav.Item key={index}>
-                                        <NavLink className={({ isActive }) => "nav-link" + (isActive ? " activated" : "")}
+                                        <NavLink className={({ isActive }) => "nav-link" + (isActive ? " active" : "")}
                                         to={{
                                             pathname: `/${link.slug}`
                                         }}

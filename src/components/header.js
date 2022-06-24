@@ -85,17 +85,12 @@ export default function Header(products){
                         <span className="address mx-2">Voßstraße 25, 30161 Hannover</span>
                     </div>
                 </Col>
-                <Col xs={12} sm="auto">
-                    <div className="d-flex align-items-center justify-content-end">
 
-                        <a href="https://www.instagram.com/hochzeit_taufaccessoires/" target="_blank"><FontAwesomeIcon icon={['fab', 'instagram']} className=" fa-lg"/></a>
-                    </div>
-                </Col>
             </Row>
-            <Row className="animation animation--zoom--out header--logo justify-content-center pt-md-2">
+            <Row className="animation animation--zoom--out header--logo justify-content-center">
                 <Col xs="auto">
                     <Link to="/">
-                        <img src="/logo.png" width="240" className="img-fluid" />
+                        <img src="/logo.png" width="200" className="img-fluid" />
 
                     </Link>
                 </Col>
@@ -121,7 +116,7 @@ export default function Header(products){
                                                             <NavDropdown.Item as="li" key={ci}>
                                                                 {   child.type_label !== "Individueller Link" ?
                                                                     <NavLink
-                                                                              className={({ isActive }) => "nav-link" + (isActive ? " activated" : "")}
+                                                                              className={({ isActive }) => "nav-link" + (isActive ? " active" : "")}
                                                                               data-name={child.title}
                                                                              onClick={() => setExpanded(false)}
                                                                              to={{
@@ -162,3 +157,13 @@ export default function Header(products){
 
     )
 }
+
+
+/*
+<Col xs={12} sm="auto">
+                    <div className="d-flex align-items-center justify-content-end">
+
+                        <a href="https://www.instagram.com/hochzeit_taufaccessoires/" target="_blank"><FontAwesomeIcon icon={['fab', 'instagram']} className=" fa-lg"/></a>
+                    </div>
+                </Col>
+ */

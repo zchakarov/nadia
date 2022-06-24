@@ -5,6 +5,8 @@ import {Col, Container, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import {animationOnScroll} from "./animationOnScroll";
 import SuggestionBar from "./suggestionBar";
+import {Loading} from "./loading";
+import Footer from "./footer";
 export default class Contact extends React.Component {
     constructor(props) {
         super(props);
@@ -21,11 +23,7 @@ export default class Contact extends React.Component {
 
 
 
-    componentDidMount() {
-        document.title = 'Kontakt';
-        animationOnScroll();
-        console.log(this.props)
-    }
+
     componentDidUpdate(prevProps, prevState, snapshot) {
         document.title = 'Kontakt';
         animationOnScroll();
@@ -71,8 +69,8 @@ export default class Contact extends React.Component {
 
         return(
             <div>
-                <div>
-                    <Container  className='contact'>
+                <div className="footerBottom">
+                    <Container className='contact'>
                         {this.state.issubmitted == false ? <form  id="contact-form" onSubmit={this.handleSubmit.bind(this)} method="POST">
 
                             <Row className='justify-content-center align-items-center contact-input'>
@@ -133,6 +131,8 @@ export default class Contact extends React.Component {
 
                         }
                     </Container>
+                    <Footer/>
+
                 </div>
 
             </div>
